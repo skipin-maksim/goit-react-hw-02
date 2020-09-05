@@ -1,0 +1,36 @@
+.allBtn {
+  position: relative;
+  margin: 0 5px;
+  padding: 10px 15px;
+  font-weight: 500;
+  font-size: 18px;
+  text-transform: capitalize;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+  outline: none;
+  transition: all 0.2s linear;
+
+  &:active {
+    top: 1px;
+    left: 1px;
+    box-shadow: none;
+  }
+}
+
+.GoodBtn {
+  composes: allBtn;
+  background-color: #5dff80;
+}
+
+.NeutralBtn {
+  composes: allBtn;
+  background-color: #8093ff;
+}
+
+.BadBtn {
+  composes: allBtn;
+  background-color: #ff80a0;
+}

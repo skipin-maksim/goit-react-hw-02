@@ -1,59 +1,17 @@
-.statistics {
-  width: 300px;
-  margin: 50px auto;
-  box-shadow: 0 0 5px rgba(18, 34, 54, 0.3);
-}
-
-.title {
-  min-height: 70px;
+.Statistics {
+  margin: 25px 0;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #fff;
-  color: #475965;
+  justify-content: space-around;
 }
 
-.statList {
-  min-height: 60px;
-  display: flex;
-
-  & li {
-    width: 100%;
-    text-align: center;
-  }
+.StatisticsResoult {
+  font-weight: 500;
 }
 
-.item {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background-color: rgb(128, 127, 127);
-  color: #fff;
-
-  &Docx {
-    composes: item;
-    background-color: #4fc4f6;
-  }
-  &Pdf {
-    composes: item;
-    background-color: #a33cf2;
-  }
-  &Mp3 {
-    composes: item;
-    background-color: #e64c65;
-  }
-  &Psd {
-    composes: item;
-    background-color: #21b8c6;
-  }
+.badFeedback {
+  color: #d31c1c;
 }
 
-.label {
-  display: block;
-  margin-bottom: 8px;
-  font-size: 12px;
-}
-
-.percentage {
-  font-size: 18px;
+.goodFeedback {
+  color: #020629;
 }

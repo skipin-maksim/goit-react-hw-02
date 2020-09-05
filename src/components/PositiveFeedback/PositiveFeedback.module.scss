@@ -1,0 +1,13 @@
+.Feedback {
+  margin-left: 8px;
+}
+
+.badFeedback {
+  composes: Feedback;
+  color: red;
+}
+
+.goodFeedback {
+  composes: Feedback;
+  color: #130068;
+}

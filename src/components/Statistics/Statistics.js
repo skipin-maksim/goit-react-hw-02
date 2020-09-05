@@ -1,42 +1,51 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-import PropTypes from 'prop-types';
-import selectClassBgColor from './colorPicker';
+import StatisticsItem from '../StatisticsItem/StatisticsItem';
+import Notification from '../Notification/Notification';
+import PositiveFeedback from '../PositiveFeedback/PositiveFeedback';
 
 import s from './Statistics.module.scss';
 
-function Statistics({ title, stats }) {
-  const isShowTitle = title;
+class Statistics extends Component {
+  countPositiveFeedbackPercentage = (callback, data) => {
+    return Math.floor((data / callback()) * 100);
+  };
 
-  return (
-    <section className={s.statistics}>
-      {isShowTitle && <h2 className={s.title}>{title}</h2>}
+  isFeedbackGiven = ({ data, totalStats }) => {
+    const { good, neutral, bad } = data;
 
-      <ul className={s.statList}>
-        {stats.map(({ id, label, percentage }) => (
-          <li key={id} className={selectClassBgColor(label)}>
-            <span className={s.label}>{label}</span>
-            <span className={s.percentage}>{percentage}%</span>
-          </li>
-        ))}
-      </ul>
-    </section>
-  );
+    return totalStats() === 0 ? (
+      <Notification message="No feedback given" />
+    ) : (
+      <>
+        <ul className={s.Statistics}>
+          <StatisticsItem name="Good" data={good} />
+          <StatisticsItem name="Neutral" data={neutral} />
+          <StatisticsItem name="Bad" data={bad} />
+        </ul>
+
+        <ul className={s.StatisticsResoult}>
+          <StatisticsItem name="Total" totalStats={totalStats} />
+          <PositiveFeedback
+            dataPositiveFeedback={good}
+            countPositiveFeedback={this.countPositiveFeedbackPercentage}
+            totalStats={totalStats}
+          />
+        </ul>
+      </>
+    );
+  };
+
+  render() {
+    const { title } = this.props;
+
+    return (
+      <>
+        <h3>{title}</h3>
+        {this.isFeedbackGiven(this.props)}
+      </>
+    );
+  }
 }
-
-Statistics.defaultProps = {
-  title: '',
-};
-
-Statistics.propTypes = {
-  title: PropTypes.string,
-  stats: PropTypes.arrayOf(
-    PropTypes.exact({
-      id: PropTypes.string.isRequired,
-      label: PropTypes.string.isRequired,
-      percentage: PropTypes.number.isRequired,
-    }).isRequired,
-  ).isRequired,
-};
 
 export default Statistics;
