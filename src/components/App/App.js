@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import ButtonsBlock from '../ButtonsBlock/ButtonsBlock';
 import Statistics from '../Statistics/Statistics';
-import StatisticsSection from '../StatisticsSection/StatisticsSection';
+import StatisticsSection from '../Statistics/StatisticsSection';
 
 class App extends Component {
   state = {
@@ -18,7 +18,12 @@ class App extends Component {
   };
 
   countTotalFeedback = () => {
-    return Object.values(this.state).reduce((ac, elem) => ac + elem);
+    const { good, neutral, bad } = this.state;
+    return good + neutral + bad;
+  };
+
+  countPositiveFeedbackPercentage = () => {
+    return Math.floor((this.state.good / this.countTotalFeedback()) * 100);
   };
 
   render() {
@@ -30,6 +35,7 @@ class App extends Component {
           title="Statistics"
           data={this.state}
           totalStats={this.countTotalFeedback}
+          countPositiveFeedbackPercentage={this.countPositiveFeedbackPercentage}
         />
       </StatisticsSection>
     );
